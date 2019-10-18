@@ -1,0 +1,48 @@
+<Simulation> 
+<!-- example xml file -->
+	<RunInfo>
+		<!--WorkingDir is a required field-->
+		<WorkingDir>.</WorkingDir>
+		<!--batchSize is an optional field that specifies number of threads-->
+		<batchSize>1</batchSize>
+	</RunInfo>
+
+	<Files>
+		<!--Specifies the files being used in the simulation-->
+		<Input name='hist' type='histinput'>solardata.csv</Input>
+	</Files>
+
+	<!--Variable groups are a convenient way to group recurring variables-->
+	<VariableGroups>
+		<Group name="solar_data">time,measured,inverted</Group>
+	</VariableGroups>
+
+	<!--Distributions are not a required field-->
+	<!--For normal distribution, what if I don't know
+	the mean and standard deviation?-->
+	
+	<!--<Distributions>
+		<Normal name="norm">
+			<mean>1</mean>
+			<sigma>0.1</sigma>
+		</Normal>
+	</Distributions>-->
+
+	<Models>
+		<PostProcessor>
+		</PostProcessor>
+	</Models>
+
+
+	<!--Declare the data objects being used
+	I want to create a history set for solar
+	supplied to the grid here.-->
+	<DataObjects>
+		<HistorySet name='solarhist'>
+			<Input>time, measured, inverted</Input>
+			<Output>time, measured, inverted</Output>
+		</HistorySet>
+	</DataObjects>
+
+
+</Simulation>
