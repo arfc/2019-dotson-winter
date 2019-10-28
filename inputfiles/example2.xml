@@ -2,7 +2,7 @@
 
 	<RunInfo>
 		<WorkingDir>.</WorkingDir>
-		<Sequence>read, plot</Sequence>
+		<Sequence>read, print, plot</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
 
@@ -17,6 +17,10 @@
 		<IOStep name="read">
 			<Input class='Files' type=''>headfile</Input>
 			<Output class='DataObjects' type='HistorySet'>data</Output>
+		</IOStep>
+		<IOStep name='print'>
+			<Input class='DataObjects' type='HistorySet'>data</Input>
+			<Output class='OutStreams' type='Print'>check_solardata</Output>
 		</IOStep>
 		<IOStep name="plot">
 			<Input class='DataObjects' type='HistorySet'>data</Input>
@@ -36,7 +40,17 @@
 
 
 	<OutStreams>
-		<Plot name='solarPlot' overwrite='false' verbosity='debug'>
+		<Print name='check_solardata'>
+			<type>csv</type>
+			<source>data</source>
+		</Print>
+		<Plot name='solarPlot' overwrite='true' verbosity='debug'>
+			<actions>
+				<how>png</how>
+				<title>
+					<text>Solar Power Data</text>
+				</title>
+			</actions>
 			<plotSettings>
 				<plot>
 					<type>line</type>
@@ -46,12 +60,6 @@
 					<ylabel>Measured Solar Panel Power</ylabel>
 				</plot>
 			</plotSettings>
-			<actions>
-				<how>png</how>
-				<title>
-					<text>Solar Power Data</text>
-				</title>
-			</actions>
 		</Plot>
 	</OutStreams>
 
