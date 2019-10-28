@@ -1,0 +1,58 @@
+<Simulation>
+
+	<RunInfo>
+		<WorkingDir>.</WorkingDir>
+		<Sequence>read, plot</Sequence>
+		<batchSize>1</batchSize>
+	</RunInfo>
+
+	<Files>
+		<Input name="headfile">head.csv</Input>
+	</Files>
+
+	<Models>
+	</Models>
+
+	<Steps>
+		<IOStep name="read">
+			<Input class='Files' type=''>headfile</Input>
+			<Output class='DataObjects' type='HistorySet'>data</Output>
+		</IOStep>
+		<IOStep name="plot">
+			<Input class='DataObjects' type='HistorySet'>data</Input>
+			<Output class='OutStreams' type='Plot'>solarPlot</Output>
+		</IOStep>
+	</Steps>
+
+	<DataObjects>
+		<HistorySet name='data'>
+			<Input>n</Input>
+			<Output>time,measured,inverted</Output>
+			<options>
+				<pivotParameter>time</pivotParameter>
+			</options>
+		</HistorySet>
+	</DataObjects>
+
+
+	<OutStreams>
+		<Plot name='solarPlot' overwrite='false' verbosity='debug'>
+			<plotSettings>
+				<plot>
+					<type>line</type>
+					<x>data|Output|time</x>
+					<y>data|Output|measured</y>
+					<xlabel>Date</xlabel>
+					<ylabel>Measured Solar Panel Power</ylabel>
+				</plot>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text>Solar Power Data</text>
+				</title>
+			</actions>
+		</Plot>
+	</OutStreams>
+
+</Simulation>
