@@ -1,0 +1,123 @@
+<Simulation verbosity='debug'> 
+<!-- example xml file -->
+	<RunInfo>
+		<!--WorkingDir is a required field-->
+		<WorkingDir>.</WorkingDir>
+		<Sequence>read</Sequence>
+		<!--batchSize is an optional field that specifies number of threads-->
+		<batchSize>1</batchSize>
+	</RunInfo>
+
+	<Files>
+		<!--Specifies the files being used in the simulation-->
+		<Input name='solarhist'>solardata.csv</Input>
+	</Files>
+
+	<!--Variable groups are a convenient way to group recurring variables-->
+	<!--<VariableGroups>
+		<Group name="solar_data">time,measured,inverted</Group>
+	</VariableGroups>-->
+
+	<Models>
+		<PostProcessor name='stats' subType='BasicStatistics'>
+			<expectedValue prefix='mean'>measured,inverted</expectedValue>
+			<!--<sigma prefix='sigma'>01,02</sigma>-->
+			<!--<sensitivity prefix='sen'>
+				<targets>A,B</targets>
+				<features>measured,inverted</features>
+			</sensitivity>-->
+			<pivotParameter>time</pivotParameter>
+		</PostProcessor>
+
+
+		<!--<ROM name='solar_rom' subType='ARMA'>
+			<pivotParameter>time</pivotParameter>
+			<Target>measured, inverted</Target>
+		</ROM>-->
+	</Models>
+
+	<Steps>
+		<!--<MultiRun name='FirstStats'>
+			<Input class='Files' type='histinput'>solarhist</Input>
+			<Model class='Models' type='PostProcessor'>stats</Model>
+			<Sampler class='Samplers' type='MonteCarlo'>MC</Sampler>
+			<Output class='DataObjects' type='PointSet'>testPrint</Output>
+			<Output class='OutStreams' type='Print'>print_solar</Output>
+		</MultiRun>-->
+	    <IOStep name="read">
+	      <Input class="Files" type="histinput">solarhist</Input>
+	      <Output class="DataObjects" type="HistorySet">solardata</Output>
+	    </IOStep>
+		<!-- <PostProcess name='stats'>
+			<Input class='DataObjects' type='HistorySet'>solardata_obj</Input>
+			<Input class='Files' type='histinput'>solarhist</Input>
+			<Model class='Models' type='PostProcessor'>stats</Model>
+			<Output class='DataObjects' type='PointSet'>testPrint</Output>
+			<Output class='OutStreams' type='Print'>print_solar</Output>
+			<Output class='OutStreams' type='Print'>obj_print</Output>
+		</PostProcess> -->
+	</Steps>
+	
+	<Distributions>
+		<Normal name="norm_m">
+			<mean>863</mean>
+			<sigma>1</sigma>
+		</Normal>
+		<Normal name='norm_i'>
+			<mean>879</mean>
+			<sigma>1</sigma>
+		</Normal> 
+	</Distributions>
+
+	<Samplers>
+		<MonteCarlo name='MC'>
+			<samplerInit>
+				<limit>800</limit>
+			</samplerInit>
+			<variable name='measured'>
+				<distribution>norm_m</distribution>
+			</variable>
+			<variable name='inverted'>
+				<distribution>norm_i</distribution>
+			</variable>
+		</MonteCarlo>
+	</Samplers>
+
+
+	<!--Declare the data objects being used
+	I want to create a history set for solar
+	power here.-->
+	<DataObjects>
+<!-- 		<HistorySet name='solardata_obj'>
+			<Input>InputPlaceHolder</Input>
+			<Output>solarhist</Output>
+			<options>
+				<pivotParameter>time</pivotParameter>
+			</options>
+		</HistorySet>
+		<PointSet name='testPrint'>
+			<Output>measured,inverted</Output>
+		</PointSet> -->
+		<HistorySet name='solardata'>
+			<Input>time</Input>
+			<Output>measured,inverted</Output>
+			<options>
+				<pivotParameter>time</pivotParameter>
+			</options>
+		</HistorySet>
+	</DataObjects>
+
+	
+	<!--OutStreams produce output for your model-->
+	<OutStreams>
+		<Print name='print_solar'>
+			<type>csv</type>
+			<source>testPrint</source>
+		</Print>
+		<Print name='obj_print'>
+			<type>csv</type>
+			<source>solardata_obj</source>
+		</Print>
+	</OutStreams>
+
+</Simulation>

@@ -1,0 +1,14 @@
+<DataObjectMetadata name="data">
+  <DataSet type="Static">
+    <dims>
+      <inverted>time</inverted>
+      <measured>time</measured>
+    </dims>
+    <general>
+      <inputs>n</inputs>
+      <outputs>measured,inverted</outputs>
+      <sampleTag>RAVEN_sample_ID</sampleTag>
+    </general>
+  </DataSet>
+  
+</DataObjectMetadata>
