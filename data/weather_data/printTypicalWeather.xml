@@ -1,0 +1,14 @@
+<DataObjectMetadata name="typical_weather">
+  <DataSet type="Static">
+    <dims>
+      <prec>time</prec>
+      <temp>time</temp>
+    </dims>
+    <general>
+      <inputs>n</inputs>
+      <outputs>temp,prec</outputs>
+      <sampleTag>RAVEN_sample_ID</sampleTag>
+    </general>
+  </DataSet>
+  
+</DataObjectMetadata>
