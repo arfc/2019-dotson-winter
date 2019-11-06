@@ -1,44 +1,47 @@
 <Simulation verbosity='debug'>
 
 	<RunInfo>
-		<WorkingDir>../data/</WorkingDir>
-		<!-- <Sequence>read, sync, typical, print</Sequence> -->
-<!-- 		<Sequence>read, sync, print</Sequence> -->
-		<Sequence>read, sync</Sequence>
-		<!-- <batchSize>1</batchSize> -->
+		<WorkingDir>../data/weather_data/</WorkingDir>
+		<Sequence>read, get_typical, print</Sequence>
+		<batchSize>1</batchSize>
 	</RunInfo>
 
 	<Files>
-		<Input name='input'>weather_head.csv</Input>
+		<Input name='input'>./weather_history_head.csv</Input>
+		<Input name='ghostDataFile'>./ghostData.csv</Input>
 	</Files>
 
+	<Models>
+		<PostProcessor name='typhist' subType='InterfacedPostProcessor'>
+			<method>TypicalHistoryFromHistorySet</method>
+			<subseqLen>730</subseqLen>
+			<outputLen>8760</outputLen>
+			<pivotParameter>time</pivotParameter>
+		</PostProcessor>
+	</Models>
+
 	<Steps>
-		<IOStep name='read'>
+		<IOStep name='read' pauseAtEnd='True'>
 			<Input class='Files' type=''>input</Input>
 			<Output class='DataObjects' type='HistorySet'>weather_raw</Output>
 		</IOStep>
-		<PostProcess name='sync'>
+		<PostProcess name='get_typical' pauseAtEnd='True'>
 			<Input class='DataObjects' type='HistorySet'>weather_raw</Input>
-			<Model class='Models' type='PostProcessor'>histsync</Model>
-			<Output class='DataObjects' type='HistorySet'>weather_synced</Output>
-			<Output class='OutStreams' type='Print'>printSyncedWeather</Output>
+			<Model class='Models' type='PostProcessor'>typhist</Model>
+			<Output class='DataObjects' type='HistorySet'>typical_weather</Output>
 		</PostProcess>
-<!-- 		<IOStep name='print'>
-			<Input class='DataObjects' type='HistorySet'>weather_synced</Input>
-			<Output class='OutStreams' type='Print'>printSyncedWeather</Output>
-		</IOStep> -->
+		<IOStep name='print' pauseAtEnd='True'>
+			<Input class='DataObjects' type='HistorySet'>typical_weather</Input>
+			<Output class='OutStreams' type='Print'>printTypicalWeather</Output>
+		</IOStep>
 	</Steps>
 
-	<Models>
-		<PostProcessor name='histsync' subType='InterfacedPostProcessor'>
-			<method>HistorySetSync</method>
-			<pivotParameter>time</pivotParameter>
-			<extension>extended</extension>
-			<syncMethod>all</syncMethod>
-			<!-- <syncMethod>grid</syncMethod>
-			<numberOfSamples>8759</numberOfSamples> -->
-		</PostProcessor>
-	</Models>
+	<OutStreams>
+		<Print name='printTypicalWeather'>
+			<type>csv</type>
+			<source>typical_weather</source>
+		</Print>
+	</OutStreams>
 
 	<DataObjects>
 		<HistorySet name='weather_raw'>
@@ -48,20 +51,12 @@
 				<pivotParameter>time</pivotParameter>
 			</options>
 		</HistorySet>
-		<HistorySet name='weather_synced'>
-			<Input>T0, p0, v0</Input> 
-			<Output>time, temp, prec</Output>
+		<HistorySet name='typical_weather'>
+			<Input>n</Input>
+			<Output>time,temp,prec</Output>
 			<options>
 				<pivotParameter>time</pivotParameter>
 			</options>
 		</HistorySet>
 	</DataObjects>
-
-	<OutStreams>
-		<Print name='printSyncedWeather'>
-			<type>csv</type>
-			<source>weather_synced</source>
-		</Print>
-	</OutStreams>
-
 </Simulation>
