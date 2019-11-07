@@ -1,0 +1,13 @@
+<DataObjectMetadata name="typicalDemand">
+  <DataSet type="Static">
+    <dims>
+      <kw>time</kw>
+    </dims>
+    <general>
+      <inputs>n</inputs>
+      <outputs>kw</outputs>
+      <sampleTag>RAVEN_sample_ID</sampleTag>
+    </general>
+  </DataSet>
+  
+</DataObjectMetadata>
