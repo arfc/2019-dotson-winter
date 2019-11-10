@@ -7,7 +7,7 @@
 	</RunInfo>
 
 	<Files>
-		<Input name='input'>./weather_history_head.csv</Input>
+		<Input name='input'>./weather_history_H.csv</Input>
 		<Input name='ghostDataFile'>./ghostData.csv</Input>
 	</Files>
 
