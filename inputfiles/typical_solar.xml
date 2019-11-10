@@ -1,6 +1,6 @@
 <Simulation verbosity='debug'>
 	<RunInfo>
-		<WorkingDir>../data/solar_model_data/</WorkingDir>
+		<WorkingDir>../../data/solar_model_data/</WorkingDir>
 		<Sequence>read,get_history,write</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>

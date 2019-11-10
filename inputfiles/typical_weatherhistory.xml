@@ -1,7 +1,7 @@
 <Simulation verbosity='debug'>
 
 	<RunInfo>
-		<WorkingDir>../data/weather_data/</WorkingDir>
+		<WorkingDir>../../data/weather_data/</WorkingDir>
 		<Sequence>read, get_typical, print</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
