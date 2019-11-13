@@ -1,0 +1,378 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Jacobs Landscape Poster
+% LaTeX Template
+% Version 1.1 (14/06/14)
+%
+% Created by:
+% Computational Physics and Biophysics Group, Jacobs University
+% https://teamwork.jacobs-university.de:8443/confluence/display/CoPandBiG/LaTeX+Poster
+% 
+% Further modified by:
+% Nathaniel Johnston (nathaniel@njohnston.ca)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[final]{beamer}
+
+\usepackage[scale=1.0]{beamerposter} % Use the beamerposter package for laying out the poster
+\usepackage[acronym,toc]{glossaries}
+\include{acros}
+\usetheme{confposter} % Use the confposter theme supplied with this template
+
+\setbeamercolor{block title}{fg=dblue!80,bg=white} % Colors of the block titles
+\setbeamercolor{block body}{fg=black,bg=white} % Colors of the body of blocks
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70} % Colors of the highlighted block titles
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10} % Colors of the body of highlighted blocks
+% Many more colors are available for use in beamerthemeconfposter.sty
+
+%-----------------------------------------------------------
+% Define the column widths and overall poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and how much separation you want between columns
+% In this template, the separation width chosen is 0.024 of the paper width and a 4-column layout
+% onecolwid should therefore be (1-(# of columns+1)*sepwid)/# of columns e.g. (1-(4+1)*0.024)/4 = 0.22
+% onecolwid should therefore be (1-(# of columns+1)*sepwid)/# of columns e.g. 
+% (1-(3+1)*0.025)/3 = 0.3
+% Set twocolwid to be (2*onecolwid)+sepwid = 0.464
+% Set threecolwid to be (3*onecolwid)+2*sepwid = 0.708
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\setlength{\paperwidth}{48in} % A0 width: 46.8in
+\setlength{\paperheight}{32in} % A0 height: 33.1in
+\setlength{\textwidth}{46in} % A0 width: 46.8in
+\setlength{\textheight}{34in} % A0 height: 33.1in
+\setlength{\sepwid}{0.025\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.3\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.625\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.95\paperwidth} % Width of three columns
+\setlength{\topmargin}{-0.5in} % Reduce the top margin size
+%-----------------------------------------------------------
+
+\usepackage{graphicx}  % Required for including images
+\newcommand{\Cyclus}{\textsc{Cyclus}\xspace}%
+\usepackage{tabularx}
+\newcolumntype{b}{X}
+\newcolumntype{s}{>{\hsize=.5\hsize}X}
+\newcolumntype{m}{>{\hsize=.75\hsize}X}
+\newcolumntype{z}{>{\hsize=.65\hsize}X}
+
+\usepackage{booktabs} % Top and bottom rules for tables
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{exscale}
+\usepackage{caption}
+
+\setbeamertemplate{bibliography item}[text]
+
+\graphicspath{{/../figures/}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\title{%
+  \texorpdfstring{%
+    \makebox[\linewidth]{%
+      \makebox[0pt][l]{%
+        \raisebox{\dimexpr-\height+\baselineskip}[0pt][0pt]
+          {\includegraphics[height=2.5\baselineskip]{UIUC_Logo}}% Left logo
+      }\hfill
+      \makebox[0pt]{Energy Systems Analysis for Microreactor Integration}%
+      \hfill\makebox[0pt][r]{%
+        \raisebox{\dimexpr-\height+\baselineskip}[0pt][0pt]
+          {\includegraphics[height=3.3\baselineskip]{arfc_atom}}% Right logo
+      }%
+    }%
+  }
+  } % Poster title
+
+\author{\textit{\textbf{Samuel G. Dotson}, Kathryn D. Huff}}
+\institute{University of Illinios at Urbana-Champaign, Department of Nuclear, Plasma, and Radiological Engineering, Urbana, IL 61801}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+\addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
+
+\setlength{\belowcaptionskip}{2ex} % White space under figures
+\setlength\belowdisplayshortskip{2ex} % White space under equations
+
+\begin{frame}[t] % The whole poster is enclosed in one beamer frame
+
+\begin{columns}[t,totalwidth=\threecolwid] % The whole poster consists of three major columns, the second of which is split into two columns twice - the [t] option aligns each column's content to the top
+
+\begin{column}{0.5\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The first column
+
+%----------------------------------------------------------------------------------------
+%	MOTIVATION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Introduction}
+\vspace{0.7em}
+\textbf{Motivation}
+
+The purpose of this study was to \textbf{characterize} the energy grid at the University of Illinois
+in order to understand \textbf{how a micro-reactor could be integrated} into the existing energy 
+infrastructure at UIUC. We were specifically interested in examining the \textbf{best applications} 
+for a reactor on the UIUC campus. This study was motivated by the 2015 Illinois Climate Action 
+Plan\cite{isee_illinois_2015} (ICAP) that set a goal for UIUC to be carbon neutral by 2050. 
+The ICAP report indicated a potential role for nuclear power in achieving that goal. 
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	OBJECTIVES
+%----------------------------------------------------------------------------------------
+\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
+\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
+\begin{alertblock}{Objectives}
+\begin{itemize}
+        \item \textbf{Understand} the University of Illinois Energy Grid and \textbf{identify} where a
+        micro-reactor could fit.
+		\item Generate a typical time series for several quantities that will serve as 
+		templates to create synthetic data to train a reduced-order model (ROM).
+\end{itemize}
+
+\end{alertblock}
+
+%----------------------------------------------------------------------------------------
+%	Conclusions
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Conclusions}
+
+There are three broad applications for a nuclear reactor on the UIUC campus. 
+Each of them can be investigated further in future work.
+
+\begin{itemize}
+	\item Replace coal and natural gas boilers with a microreactor, producing 100\% 
+	of the University's steam needs. 
+	\item Cogenerate Steam and Electricity* 
+	\item Use the heat from the reactor to produce Hydrogen or other industrial processes.
+\end{itemize}
+
+\small{*The power plant at UIUC is a cogeneration plant, thus it would be inefficient for 
+the reactor to generate electricity only.}
+\end{block}
+
+\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
+\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
+\begin{alertblock}{Future Work }
+This work marks the first step towards establishing the technical requirements for a microreactor, 
+such as the optimal size of the reactor. 
+\begin{itemize}
+	\item Determine the optimal reactor size by following the method from Baker et. al \cite{baker_optimal_2018}.
+	\item Quantitatively outline the best applications for a micro-reactor.
+	\item Develop projections about future energy needs on campus that could be fulfilled by nuclear.
+\end{itemize}
+
+
+\end{alertblock}
+
+
+\setbeamercolor{block alerted title}{fg=white,bg=dblue} % Change the alert block title colors
+\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
+
+\begin{alertblock}{Contact Information}
+	\setbeamercolor{block title}{fg=norange,bg=white} % Change the block title color
+	\begin{itemize}
+		\item Email: \href{mailto:sgd2@illinois.edu}{sgd2@illinois.edu}
+	\end{itemize}
+	
+\end{alertblock}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the first column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{column}{\onecolwid} % The second column
+%----------------------------------------------------------------------------------------
+%	MODELS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Energy Grid Characterization}
+\vspace{0.7em}
+\textbf{UIUC Energy Grid}\\
+
+The flow chart for the UIUC energy grid in the left figure, below, was drawn with information from the 
+Illinois Energy Master Plan \cite{affiliated_engineers_inc_utilities_2015}. The lower right figure emulates
+the energy grid flow chart from Baker et. al \cite{baker_optimal_2018}.  
+
+
+
+\begin{figure}
+	\centering
+	\begin{minipage}{0.48\linewidth}
+		\centering
+		\label{fig:grid}
+		\includegraphics[width=\linewidth]{../figures/campus_grid_breakdown.png}
+		\captionof{figure}{A flow chart describing the current campus energy grid.}
+	\end{minipage}
+	\begin{minipage}{0.48\linewidth}
+		\centering
+		\label{fig:future_grid}
+		\includegraphics[width=\linewidth]{../figures/uiuc-es2.png}
+		\captionof{figure}{A flow chart describing a potential grid with a micro-reactor.}
+	\end{minipage}
+\end{figure}
+
+\vspace{1cm}
+\textbf{Typical Years}\\
+
+In order to generate a typical year of data, datasets for 2015-2018 with hourly resolution were passed
+to the RAVEN framework which collected and evaluated each month of data to find the most ``typical'' 
+month. These ``typical'' months were concatenated into a single year of data to get a ``typical year.''
+This method aims to remove outliers due to extreme or unusual weather conditions \cite{alfonsi_raven_2016}\cite{baker_optimal_2018}. 
+
+\vspace{0.7em}
+\begin{figure}
+	\centering
+	\begin{minipage}{0.23\linewidth}
+		\centering
+		\label{fig:load}
+		\includegraphics[width=\linewidth]{../figures/typical_demand.png}
+		% \captionof{figure}{}
+	\end{minipage}
+	\begin{minipage}{0.23\linewidth}
+		\centering
+		\label{fig:steam}
+		\includegraphics[width=\linewidth]{../figures/typical_steam.png}
+		% \captionof{figure}{}
+	\end{minipage}
+	\begin{minipage}{0.23\linewidth}
+		\centering
+		\label{fig:solar}
+		\includegraphics[width=\linewidth]{../figures/typical_solarpower.png}
+		% \captionof{figure}{}
+	\end{minipage}
+	\begin{minipage}{0.23\linewidth}
+		\centering
+		\label{fig:temp}
+		\includegraphics[width=\linewidth]{../figures/typical_weather.png}
+		% \captionof{figure}{}
+	\end{minipage}
+	\caption{A typical year of data for quantity \textit{\textbf{X}}. Generated using the RAVEN framework.\cite{baker_optimal_2018}}
+\end{figure}
+
+\textbf{Modelling Solar Farm Output}\\
+
+In order to fill gaps in the real output of the the power output was calcuated using solar irradiance data. The model tends to underpredict the power output but generally gets the correct shape, which lends credence to the irradiance data.
+\begin{figure}[H]
+	\centering
+	\label{fig:model-comparison}
+	\includegraphics[width=\linewidth]{../figures/september_model_comparison.png}
+	\caption{Comparing the predicted power output with the actual power output for September 2016}
+\end{figure}
+
+\end{block}
+
+\end{column} % End of column 2
+%----------------------------------------------------------------------------------------
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The third column
+
+\begin{block}{Methods}
+\vspace{0.7em}
+\textbf{Modelling Solar Farm Output}\\
+The campus solar farm offers publicly available data about it's output \cite{alsoenergy_university_2019}, but there are several
+long periods of missing data. In order to fill this missing data I collected data from Open Energy 
+Information (OpenEI) \cite{noauthor_national_nodate} about the solar irradiance in Champaign-Urbana.
+To get the power output from the solar irradiance the following equations were used \cite{garcia_nuclear_2015}: 
+
+\begin{equation}
+ \delta = 23.44\sin\left(\left(\frac{\pi}{180}\right)\left(\frac{360}{365}\right)(N+284)\right) \text{ } \left[degrees \right]	
+\end{equation}
+\small{\begin{itemize}
+ 	\item $\delta$ is the solar declination (``how high in the sky'').
+ 	\item $N$ is the day number (January 1st is 1, and so on).
+ 	\item The factor of $\frac{\pi}{180}$ is a conversion factor.
+ \end{itemize} }
+
+
+\begin{equation}
+	G_T = DNI*\cos\left(\beta+\delta-lat\right) + DHI*\left(\frac{180-\beta}{180}\right) \text{ } \left[\frac{W}{m^2}\right]
+\end{equation}
+\small{
+	\begin{itemize}
+		\item $G_T$ is the total solar irradiance
+		\item $DNI$ is the \textit{direct normal irradiance}.
+		\item $DHI$ is the \textit{diffuse horizontal irradiance}.
+		\item $\beta$ is the tilt angle of the solar panel.
+	\end{itemize}
+}
+
+\begin{equation}
+	P = G_T\eta_{ref}\tau_{pv}A\left[1-\gamma\left(T-25\right)\right] \text{ } \left[W\right]
+\end{equation}
+
+\small{
+	\begin{itemize}
+		\item $\eta$, $\tau$, $\gamma$ are solar panel properties (efficiency, transmittance, and temperature coefficient, respectively).
+		\item $A$ is the area coverage of the solar panels.
+	\end{itemize}
+}
+
+
+\end{block}
+
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setbeamercolor{block title}{fg=norange,bg=white} % Change the block title color
+
+\begin{block}{Acknowledgements}
+	
+This work was made possible with data provided by UIUC Facilities and Services, 
+in particular, Morgan White, Mike Marquissee, and Mike Larson. Additionally, 
+this work is funded by the NRC Fellowship Program.  
+	
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+
+\begin{block}{References}
+
+	{\footnotesize\bibliographystyle{abbrv} 
+	\bibliography{poster}}
+\end{block}
+
+
+%----------------------------------------------------------------------------------------
+
+
+
+\end{column} % End of the third column
+
+\end{columns} % End of all the columns in the poster
+
+\end{frame} % End of the enclosing frame
+
+\end{document}
+\begin{column}{\sepwid}\end{column} % Empty spacer column
